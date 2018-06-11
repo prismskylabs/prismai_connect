@@ -247,8 +247,10 @@ struct Track: public Artifact
     {
     }
 
-    Track(const std::string& objectId, int32_t frameWidth, int32_t frameHeight, const TrackPoints& points)
-        : objectId(objectId)
+    Track(const std::string& extId, timestamp_t begin, timestamp_t end,
+          const std::string& objectId, int32_t frameWidth, int32_t frameHeight, const TrackPoints& points)
+        : Artifact(extId, begin, end)
+        , objectId(objectId)
         , frameWidth(frameWidth)
         , frameHeight(frameHeight)
         , points(points)
