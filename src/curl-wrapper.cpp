@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #include "private/curl-wrapper.h"
 #include "easylogging++.h"

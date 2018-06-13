@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (C) 2017 Prism Skylabs
+# Copyright (C) 2017-2018 PrismAI
 #
 # Builds Boost libraries for Ubuntu 14.04.
 # Place this script into boost folder aquired from

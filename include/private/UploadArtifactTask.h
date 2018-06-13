@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #ifndef PRISM_UPLOAD_ARTIFACT_TASK_H_
 #define PRISM_UPLOAD_ARTIFACT_TASK_H_

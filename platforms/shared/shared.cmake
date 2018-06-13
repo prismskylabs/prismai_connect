@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Prism Skylabs
+# Copyright (C) 2017-2018 PrismAI
 function(download_artifact repoUrl platform projectName version dstPath)
 
     set(archiveName artifact.tar.gz)

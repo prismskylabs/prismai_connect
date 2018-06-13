@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #ifndef PRISM_POOLBASEDCURLFACTORY_H
 #define PRISM_POOLBASEDCURLFACTORY_H

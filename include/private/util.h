@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  *
  * This header is internal to SDK and isn't intended for use by SDK users.
  */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #ifndef CONNECT_SDK_ARTIFACT_UPLOADER_H
 #define CONNECT_SDK_ARTIFACT_UPLOADER_H

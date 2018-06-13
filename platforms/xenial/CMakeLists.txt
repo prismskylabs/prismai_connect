@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Prism Skylabs
+# Copyright (C) 2017-2018 PrismAI
 
 include(../shared/shared.cmake)
 findBoostCommon()

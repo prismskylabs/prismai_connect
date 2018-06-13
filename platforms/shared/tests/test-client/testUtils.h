@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #ifndef PRISM_TEST_UTILS_H
 #define PRISM_TEST_UTILS_H

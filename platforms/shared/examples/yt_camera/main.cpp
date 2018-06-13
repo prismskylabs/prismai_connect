@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>

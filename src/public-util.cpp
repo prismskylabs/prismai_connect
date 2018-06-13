@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Prism Skylabs
+ * Copyright (C) 2017-2018 PrismAI
  */
 #include "public-util.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
