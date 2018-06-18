@@ -210,7 +210,7 @@ int main(int argc, char** argv)
 {
     if (argc < 3)
     {
-        std::cout << "Usage:\n\test-client <camera-name> <input-file>\n" << std::endl;
+        std::cout << "Usage:\n\ttest-client <camera-name> <input-file>\n" << std::endl;
         return -1;
     }
 
@@ -299,6 +299,30 @@ int main(int argc, char** argv)
     prc::id_t feedId = feed.id;
 
     LOG(INFO) << "Feed ID: " << feedId;
+
+    prc::Feed sameFeed;
+    status = client.queryFeed(accountId, feedId, sameFeed);
+
+    if (status.isError())
+    {
+        LOG(ERROR) << "Failed to find feed with id: " << feedId;
+        return -1;
+    }
+
+    LOG(INFO) << "Feed ID: " << feedId << " Name: " << sameFeed.name;
+
+    prc::Feed invalidFeed;
+    status = client.queryFeed(accountId, 31232, invalidFeed);
+
+    if (status.isError())
+    {
+        LOG(INFO) << "Invalid feed not found";
+    }
+    else
+    {
+        LOG(ERROR) << "Failed to find feed with id: " << feedId;
+        return -1;
+    }
 
     testUploadTimeSeries(client, accountId, feedId);
     testUploadTrack(client, accountId, feedId);
