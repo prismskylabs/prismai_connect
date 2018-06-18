@@ -312,7 +312,9 @@ int main(int argc, char** argv)
     LOG(INFO) << "Feed ID: " << feedId << " Name: " << sameFeed.name;
 
     prc::Feed invalidFeed;
-    status = client.queryFeed(accountId, 31232, invalidFeed);
+    prc::id_t invalidFeedID = 31232;
+
+    status = client.queryFeed(accountId, invalidFeedID, invalidFeed);
 
     if (status.isError())
     {
@@ -320,7 +322,7 @@ int main(int argc, char** argv)
     }
     else
     {
-        LOG(ERROR) << "Failed to find feed with id: " << feedId;
+        LOG(ERROR) << "Invalid feed found: " << invalidFeedID;
         return -1;
     }
 
