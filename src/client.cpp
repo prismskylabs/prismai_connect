@@ -54,6 +54,7 @@ public:
     Status queryAccountsList(Accounts& accounts);
     Status queryAccount(id_t accountId, Account &account);
     Status queryFeedsList(id_t accountId, Feeds& feeds);
+    Status queryFeed(id_t accountId, id_t feedId, Feed& feed);
     Status registerFeed(id_t accountId, const Feed& feed);
 
     Status uploadBackground(id_t accountId, id_t feedId, const Background& background, const Payload& payload);
@@ -147,6 +148,11 @@ Status Client::queryAccount(id_t accountId, Account &account)
 Status Client::queryFeedsList(id_t accountId, Feeds &feeds)
 {
     return impl().queryFeedsList(accountId, feeds);
+}
+
+Status Client::queryFeed(id_t accountId, id_t feedId, Feed &feed)
+{
+    return impl().queryFeed(accountId, feedId, feed);
 }
 
 Status Client::registerFeed(id_t accountId, const Feed& feed)
@@ -589,6 +595,82 @@ Status Client::Impl::queryFeedsList(id_t accountId, Feeds& feeds)
                 break;
             }
         }
+    } while (false);
+
+    if (rv.isError())
+        LOG(ERROR) << fname << ": " << rv;
+
+    return rv;
+}
+
+Status Client::Impl::queryFeed(id_t accountId, id_t feedId, Feed& feed)
+{
+    const char* fname = "Client::queryFeed()";
+
+    if (logFlags_ & Client::LOG_INPUT)
+    {
+        LOG(DEBUG) << fname << ": accountId: " << accountId
+                   << ", feed{id: " << feedId
+                   << "}";
+    }
+
+    Status rv = makeSuccess();
+
+    do
+    {
+        CurlSessionPtr sessionPtr = createSession();
+
+        if (!sessionPtr)
+        {
+            LOG(ERROR) << fname << ": failed to create CURL session";
+            rv = makeError();
+            break;
+        }
+
+        CurlSession& session = *sessionPtr;
+
+        std::string url = getFeedUrl(accountId, feedId);
+
+        CURLcode res = session.httpGet(url);
+
+        if (res != CURLE_OK)
+        {
+            LOG(ERROR) << fname << ": GET " << url << " failed. "
+                       << "CURLcode: " << res << ", " << curl_easy_strerror(res);
+            rv = makeNetworkError();
+            break;
+        }
+
+        long responseCode = session.getResponseCode();
+
+        if (responseCode != 200)
+        {
+            LOG(ERROR) << fname << ": GET " << url << " failed."
+                       << " HTTP response code: " << responseCode;
+            rv = makeError(responseCode, Status::FACILITY_HTTP);
+            break;
+        }
+
+        const std::string& responseBody = session.getResponseBodyAsString();
+
+        rapidjson::Document document;
+
+        if (document.Parse(responseBody.c_str()).HasParseError())
+        {
+            LOG(ERROR) << fname << ": error parsing response: '" << responseBody
+                       << "' to GET " << url;
+            rv = makeError();
+            break;
+        }
+
+        rv = parseFeedJson(document, feed);
+
+        if (rv.isError())
+        {
+            LOG(ERROR) << fname << ": response body " << responseBody;
+            break;
+        }
+
     } while (false);
 
     if (rv.isError())

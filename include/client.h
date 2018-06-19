@@ -72,6 +72,8 @@ public:
 
     Status queryFeedsList(id_t accountId, Feeds& feeds);
 
+    Status queryFeed(id_t accountId, id_t feedId, Feed& feed);
+
     Status registerFeed(id_t accountId, const Feed& feed);
 
     // image uploads
